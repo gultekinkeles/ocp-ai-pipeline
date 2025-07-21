@@ -5,6 +5,7 @@ metadata:
 spec:
   params:
     - name: NAMESPACE
+      value: gkeles
       type: string
   workspaces:
     - name: input

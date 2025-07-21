@@ -8,6 +8,7 @@ spec:
     - name: IMAGE_NAME
     - name: CONTEXT_DIR
     - name: NAMESPACE
+      value: gkeles
   workspaces:
     - name: shared-workspace
   tasks:

@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/gultekinkeles/ocp-ai-pipeline.git'
     targetRevision: HEAD
-    path: rhoai-tekton-pipeline/argo
+    path: .
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: gkeles

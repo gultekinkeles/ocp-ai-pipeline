@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rhoai-tekton-pipeline
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/gultekinkeles/ocp-ai-pipeline.git'  # <-- burayı kendi repo URL'inle değiştir
+    targetRevision: HEAD
+    path: .  # <-- kritik: repo kök dizinini senkronize eder
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: gkeles
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+

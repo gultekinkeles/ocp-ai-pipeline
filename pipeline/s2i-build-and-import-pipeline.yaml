@@ -18,9 +18,9 @@ spec:
         name: s2i-python
       params:
         - name: IMAGE
-          value: $(params.IMAGE_NAME)
+          value: "$(params.IMAGE_NAME)"
         - name: PATH_CONTEXT
-          value: $(params.CONTEXT_DIR)
+          value: "$(params.CONTEXT_DIR)"
       workspaces:
         - name: source
           workspace: shared-workspace
@@ -30,7 +30,7 @@ spec:
         name: generate-pipeline-yaml
       params:
         - name: image
-          value: $(params.IMAGE_NAME)
+          value: "$(params.IMAGE_NAME)"
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -40,7 +40,7 @@ spec:
         name: import-pipeline-to-rhoai
       params:
         - name: NAMESPACE
-          value: $(params.NAMESPACE)
+          value: "$(params.NAMESPACE)"
       workspaces:
         - name: input
           workspace: shared-workspace

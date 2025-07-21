@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/YOUR_USERNAME/rhoai-tekton-pipeline.git'
+    repoURL: 'https://github.com/gultekinkeles/ocp-ai-pipeline.git'
     targetRevision: HEAD
     path: .
   destination:

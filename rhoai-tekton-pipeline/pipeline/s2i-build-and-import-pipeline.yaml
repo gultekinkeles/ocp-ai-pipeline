@@ -1,0 +1,45 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: s2i-build-and-import-pipeline
+spec:
+  params:
+    - name: APP_NAME
+    - name: IMAGE_NAME
+    - name: CONTEXT_DIR
+    - name: NAMESPACE
+  workspaces:
+    - name: shared-workspace
+  tasks:
+    - name: build
+      taskRef:
+        kind: ClusterTask
+        name: s2i-python
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE_NAME)
+        - name: PATH_CONTEXT
+          value: $(params.CONTEXT_DIR)
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+    - name: generate-yaml
+      runAfter: [build]
+      taskRef:
+        name: generate-pipeline-yaml
+      params:
+        - name: image
+          value: $(params.IMAGE_NAME)
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+    - name: import-to-rhoai
+      runAfter: [generate-yaml]
+      taskRef:
+        name: import-pipeline-to-rhoai
+      params:
+        - name: NAMESPACE
+          value: $(params.NAMESPACE)
+      workspaces:
+        - name: input
+          workspace: shared-workspace

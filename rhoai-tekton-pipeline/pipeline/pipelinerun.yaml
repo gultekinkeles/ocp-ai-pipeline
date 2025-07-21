@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: s2i-pipeline-run-
+spec:
+  pipelineRef:
+    name: s2i-build-and-import-pipeline
+  params:
+    - name: APP_NAME
+      value: sentiment-pipeline
+    - name: IMAGE_NAME
+      value: quay.io/gultekinkeles/sentiment-pipeline:latest
+    - name: CONTEXT_DIR
+      value: pipeline-src
+    - name: NAMESPACE
+      value: rhods-applications
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: tekton-pvc

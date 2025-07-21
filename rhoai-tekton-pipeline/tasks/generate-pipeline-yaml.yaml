@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: generate-pipeline-yaml
+spec:
+  params:
+    - name: image
+      type: string
+  workspaces:
+    - name: output
+  steps:
+    - name: run
+      image: $(params.image)
+      workingDir: /workspace/output
+      script: |
+        python /app/pipeline.py

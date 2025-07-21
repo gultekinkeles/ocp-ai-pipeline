@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: import-pipeline-to-rhoai
+spec:
+  params:
+    - name: NAMESPACE
+      type: string
+  workspaces:
+    - name: input
+  steps:
+    - name: import
+      image: registry.redhat.io/openshift4/ose-cli
+      script: |
+        oc apply -f $(workspaces.input.path)/pipeline.yaml -n $(params.NAMESPACE)
